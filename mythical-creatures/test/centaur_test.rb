@@ -5,6 +5,7 @@ require_relative '../lib/centaur'
 
 class CentaurTest < Minitest::Test
   def test_it_has_a_name
+
     centaur = Centaur.new("George","Palomino")
     assert_equal "George", centaur.name
   end
@@ -100,6 +101,7 @@ class CentaurTest < Minitest::Test
 
   def test_it_can_stand_up
     skip
+
     centaur = Centaur.new("George","Palomino")
     centaur.lay_down
     centaur.stand_up
@@ -108,6 +110,7 @@ class CentaurTest < Minitest::Test
 
   def test_after_sleeping_it_is_no_longer_cranky
     skip
+
     centaur = Centaur.new("George","Palomino")
 
     centaur.shoot
