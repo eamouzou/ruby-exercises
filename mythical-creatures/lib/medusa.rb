@@ -13,9 +13,16 @@ class Medusa
   end
 
   def stare(victim)
-    @statues << victim
-    @count += 1
-    victim.stoned = true
+    if @statues.count >=3
+      victim.stoned = true
+      return "Too full for 4. Must switch! Bye #{@statues[0].name}."
+      @statues.shift
+      @statues << victim
+    else
+      @statues << victim
+      @count += 1
+      victim.stoned = true
+    end
 
   end
 
