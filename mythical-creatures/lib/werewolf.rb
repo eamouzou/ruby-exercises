@@ -1,11 +1,14 @@
 class Werewolf
-  attr_reader :name, :location, :human, :hungry
+  attr_reader :name, :location, :human, :hungry, :victims,
+  :consumed
 
   def initialize(name, location = "London", human = true)
     @name = name
     @location = location
     @human = human
     @hungry = false
+    @victims = []
+    @consumed = 0
   end
 
   def human?
@@ -36,6 +39,18 @@ class Werewolf
 
   def hungry?
     @hungry
+  end
+
+  def yum_yum(victim)
+    if human? == true
+      return "The change must occur before the feed!"
+    elsif human? == false
+      @victims << victim
+      @consumed += 1
+      victim.status = :dead
+      @hungry = false
+      return "Muy delicioso!"
+    end
   end
 
 end

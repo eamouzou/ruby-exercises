@@ -20,7 +20,7 @@ class WerewolfTest < Minitest::Test
   end
 
   def test_when_starting_as_a_human_changing_means_it_is_no_longer_human
-    skip
+    
     werewolf = Werewolf.new("David","London")
     werewolf.change!
     refute werewolf.human?
@@ -67,31 +67,70 @@ class WerewolfTest < Minitest::Test
 
   class Victim
     attr_accessor :status
+    attr_reader :name
 
-    def initialize
+    def initialize(name)
       @status = :alive
+      @name = name
     end
   end
 
   def test_consumes_a_victim
-    skip
+
     # your code here
-    
+    mensah = Werewolf.new("Mensah", "Legon")
+    asoh = Victim.new("Asoh")
+
+    assert_equal :alive, asoh.status
+
+    mensah.change!
+
+    assert_equal "Muy delicioso!", mensah.yum_yum(asoh)
+
+    assert_equal :dead, asoh.status
+    assert_equal 1, mensah.consumed
+
   end
 
   def test_cannot_consume_victim_if_in_human_form
-    skip
+
     # your code here
+    mensah = Werewolf.new("Mensah", "Legon")
+    asoh = Victim.new("Asoh")
+
+    assert mensah.human?
+    assert_equal "The change must occur before the feed!", mensah.yum_yum(asoh)
+
   end
 
   def test_a_werewolf_who_has_consumed_a_victim_is_no_longer_hungry
-    skip
+
     # your code here
+    mensah = Werewolf.new("Mensah", "Legon")
+    asoh = Victim.new("Asoh")
+
+    assert_equal :alive, asoh.status
+
+    mensah.change!
+    assert mensah.hungry?
+
+    mensah.yum_yum(asoh)
+
+    refute mensah.hungry?
   end
 
   def test_a_werewolf_who_has_consumed_a_victim_makes_the_victim_dead
-    skip
+
     # your code here
+    mensah = Werewolf.new("Mensah", "Legon")
+    asoh = Victim.new("Asoh")
+
+    assert_equal :alive, asoh.status
+
+    mensah.change!
+
+    assert_equal "Muy delicioso!", mensah.yum_yum(asoh)
+    assert_equal :dead, asoh.status
   end
 
 end
