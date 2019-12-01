@@ -4,7 +4,7 @@ require './lib/lion'
 
 class LionTest < Minitest::Test
   def test_it_exists
-    lionel = Lion.new({name: "Lionel", sound: "roar"})
+    lionel = Lion.new({name: "Lionel", sound: "roar"}) #braces or "{}" are used for hashes
     assert_instance_of Lion, lionel
   end
 
