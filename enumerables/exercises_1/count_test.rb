@@ -1,6 +1,11 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
+#count() is a Array class method which returns the number of elements in the array.
+#It can also find the total number of a particular element in the array.
+# Returns the number of elements.
+# If an argument is given, counts the number of elements which equal obj using ==.
+# If a block is given, counts the number of elements for which the block returns a true value.
 
 class CountTest < Minitest::Test
 
