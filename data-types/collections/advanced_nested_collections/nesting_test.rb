@@ -127,9 +127,11 @@ class NestedTest < MiniTest::Test
   def test_full_menu_for_olive_garden
 
     #=======================
-    risotto_hash = {}
-    steak_hash = {}
-     olive_garden_menu = stores[:olive_garden]
+    menu_hash = {}
+    stores[:olive_garden][:dishes].each do |dish_hash|
+      menu_hash[dish_hash[:name]] = dish_hash
+    end
+     olive_garden_menu = menu_hash
     #=======================
     expected = ({"Risotto"=>{:name=>"Risotto", :ingredients=>["Rice", "Cheese", "Butter"], :price=>12},
                   "Steak"=>{:name=>"Steak", :ingredients=>["Beef", "Garlic"], :price=>15}})
@@ -137,9 +139,17 @@ class NestedTest < MiniTest::Test
   end
 
   def test_menu_accross_all_restaurants
-     skip
+
     #=======================
-    #  full_menu = <your code here>
+    menu_hash = {} # how would I do this if I wanted to iterate over the dishes
+    # array based on the length for example, if there are three dishes in one,
+    # two in another, and one in the last, how would i be able to do the same
+    # operation wihtout a millin if clauses.
+    stores.each do |store|
+      menu_hash[store[1][:dishes][0][:name]] = store[1][:dishes][0]
+      menu_hash[store[1][:dishes][1][:name]] = store[1][:dishes][1]
+    end
+      full_menu = menu_hash
     #=======================
     expected = ({"Risotto"=>
                       {:name=>"Risotto", :ingredients=>["Rice", "Cheese", "Butter"], :price=>12},
