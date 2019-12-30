@@ -246,7 +246,7 @@ class StringTest < Minitest::Test
   def test_22
 
     phrase = "   \n  \tto the    moon\n\n\t    "
-    # In place of the line below, call a method to acheive the expected outcome
+    # In place of the line below, call a method to achieve the expected outcome
     actual = phrase.rstrip
     expected = "   \n  \tto the    moon"
 
