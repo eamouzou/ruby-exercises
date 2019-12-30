@@ -56,7 +56,7 @@ class CountTest < Minitest::Test
 
     numbers = [2, 5, 19, 25, 35, 67]
     tally = numbers.count do |number|
-      (number%5) == 0
+      (number%5) == 0 # numbers divided by 5 have a medulo of 0. Medulo is remainder.
     end
     assert_equal 3, tally
   end

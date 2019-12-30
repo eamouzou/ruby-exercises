@@ -48,15 +48,16 @@ class MapTest < Minitest::Test
 
     numbers = [234, 10, 9119, 38881]
     zip_codes = numbers.map do |number|
-      if number.to_s.length == 2        #easier way?
-        "000#{number}"
-      elsif number.to_s.length == 3
-        "00#{number}"
-      elsif number.to_s.length == 4
-        "0#{number}"
-      elsif number.to_s.length == 5
-        "#{number}"
-      end
+      number.to_s.rjust(5, '0')
+      # if number.to_s.length == 2        #easier way?
+      #   "000#{number}"                  #number.to_s.rjust(5, '0')
+      # elsif number.to_s.length == 3
+      #   "00#{number}"
+      # elsif number.to_s.length == 4
+      #   "0#{number}"
+      # elsif number.to_s.length == 5
+      #   "#{number}"
+      # end
     end
     assert_equal ["00234", "00010", "09119", "38881"], zip_codes
   end
@@ -74,7 +75,7 @@ class MapTest < Minitest::Test
 
     words = ["green", "sheep", "travel", "least", "boat"]
     without_vowels = words.map do |word|
-      word.delete 'aeiou'
+      word.delete 'aeiou'           #another way: word.gsub(/[aeiou]/, "")
     end
     assert_equal ["grn", "shp", "trvl", "lst", "bt"], without_vowels
   end
@@ -83,7 +84,9 @@ class MapTest < Minitest::Test
 
     animals = ["dog", "cat", "mouse", "frog", "platypus"]
     trimmed = animals.map do |animal|
-      animal[0...-1]
+      animal.chop
+    # trimmed = animals.map do |animal|     #another way: .chop
+    #   animal[0...-1]
     end
     assert_equal ["do", "ca", "mous", "fro", "platypu"], trimmed
   end
