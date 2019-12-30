@@ -1,18 +1,20 @@
 class Car
 
-  attr_reader: color
+  attr_reader :color
+  attr_accessor :color # is this what's supposed to happen here?
 
   def initialize
-    @ileage = 0
+    @mileage = 0
     @wheel_count = 4
+    @color = color
   end
 
   def horn
     puts "BEEEEP"
   end
 
-  def drive()
-    @milage += distance
+  def drive(distance)
+    @mileage += distance
     puts "I'm driving #{distance} miles!"
   end
 
@@ -27,7 +29,6 @@ class Car
     else
       puts "Nope!"
     end
-
   end
 
 
@@ -38,4 +39,5 @@ end
 my_car = Car.new
 my_car.drive(6)
 my_car.color = "purple"
+require "pry"; binding.pry
 my_car.start
