@@ -66,6 +66,7 @@ class CountTest < Minitest::Test
     prices = [1.0, 3.9, 5.99, 18.5, 20.0]
     tally = prices.count do |price|
       price == price.round(1).to_i.to_f #has to be an easier way of doing this
+      #can do price.to_s.end_with?("0")
     end
     assert_equal 2, tally
   end
