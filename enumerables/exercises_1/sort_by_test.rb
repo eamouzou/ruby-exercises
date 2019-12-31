@@ -30,7 +30,7 @@ class SortByTest < Minitest::Test
 
     distances = ["1cm", "9cm", "30cm", "4cm", "2cm"]
     sorted = distances.sort_by do |distance|
-      distance
+      distance.to_i
     end
     assert_equal ["1cm", "2cm", "4cm", "9cm", "30cm"], sorted
   end
@@ -54,10 +54,12 @@ class SortByTest < Minitest::Test
     assert_equal [10.01, 9.91, 11.0, 3.02, 17.9], sorted
   end
 
-  def test_sort_by_number_of_cents #??
-    skip
+  def test_sort_by_number_of_cents 
+
     prices = [3.02, 9.91, 7.9, 10.01, 11.0]
-    # Your code goes here
+    sorted = prices.sort_by do |price|
+      price - price.to_i # for ex. 3.02 - 3 (3.02 to integer gives you 3) == .02
+    end
     assert_equal [11.0, 10.01, 3.02, 7.9, 9.91], sorted
   end
 
