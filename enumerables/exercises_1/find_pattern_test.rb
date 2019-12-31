@@ -3,82 +3,120 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 class FindPatternTest < Minitest::Test
+  #without the break inside your evaluation it will continue to find variables that meet the condition
+  # break allows it to exit the enumerable once it's found the first variable that meets the condition
 
   def test_find_first_seven_letter_word
     words = ["capricious", "berry", "unicorn", "bag", "apple", "festering", "pretzel", "pencil"]
     found = nil
     words.each do |word|
       if word.length == 7
-        found = word
-        break
+        found = word      #  next will enter the next iteration without further
+        break          # evaluation, and break will exit from the enumerable entirely
+        # https://medium.com/@ryanflach/next-and-break-in-ruby-4bf9daf5322d
       end
     end
     assert_equal "unicorn", found
   end
 
   def test_no_waldo
+
     words = ["scarf", "sandcastle", "flag", "pretzel", "crow", "key"]
     found = nil
     words.each do |word|
-      # Your code goes here
+      if word == "Waldo"
+        found = word
+        break
+      end
     end
     assert_equal nil, found
   end
 
   def test_find_waldo
-    skip
+
     words = ["noise", "dog", "fair", "house", "waldo", "bucket", "fish"]
     found = nil
-    # Your code goes here
+    words.each do |word|
+      found = word if word == "waldo"
+      break if word == "waldo"
+    end
     assert_equal "waldo", found
   end
 
   def test_cannot_find_3_letter_words
-    skip
+
     words = ["piglet", "porridge", "bear", "blueberry"]
-    # Your code goes here
+    found = nil
+    words.each do |word|
+      found = word if word.length == 3
+      break if word.length == 3
+    end
     assert_equal nil, found
   end
 
   def test_find_13
-    skip
+
     numbers = [2, 13, 19, 8, 3, 27]
-    # Your code goes here
+    found = nil
+    numbers.each do |number|
+      found = number if number == 13
+      break if number == 13
+    end
     assert_equal 13, found
   end
 
   def test_find_first_even_number
-    skip
+
     numbers = [3, 7, 13, 11, 10, 2, 17]
-    # Your code goes here
+    found = nil
+    numbers.each do |number|
+      found = number if number.even?
+      break if number.even?
+    end
     assert_equal 10, found
   end
 
   def test_find_first_multiple_of_3
-    skip
+
     numbers = [2, 8, 9, 27, 24, 5]
-    # Your code goes here
+    found = nil
+    numbers.each do |number|
+      found = number if number % 3 == 0
+      break if number % 3 == 0
+    end
     assert_equal 9, found
   end
 
   def test_find_first_word_starting_with_q
-    skip
+
     words = ["weirdo", "quill", "fast", "quaint", "quitter", "koala"]
-    # Your code goes here
+    found = nil
+    words.each do |word|
+      found = word if word.start_with?("q")
+      break if word.start_with?("q")
+    end
     assert_equal "quill", found
   end
 
   def test_find_first_word_ending_with_er
-    skip
+
     words = ["biggest", "pour", "blight", "finger", "pie", "border"]
-    # Your code goes here
+    found = nil
+    words.each do |word|
+      found = word if word.end_with?("er")
+      break if word.end_with?("er")
+    end
     assert_equal "finger", found
   end
 
   def test_find_first_number_greater_than_20
-    skip
+
     numbers = [1, 8, 19, 21, 29, 31, 34]
-    # Your code goes here
+    found = nil
+    numbers.each do |number|
+      found = number if number > 20
+      break if number > 20
+    end
     assert_equal 21, found
   end
 
