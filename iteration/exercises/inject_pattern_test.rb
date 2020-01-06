@@ -15,6 +15,7 @@ class InjectPatternTest < Minitest::Test
   end
 
   def test_2
+
     bills = {
       rent: 800,
       car: 240,
@@ -32,34 +33,37 @@ class InjectPatternTest < Minitest::Test
   end
 
   def test_3
+
     numbers = [2, 3, 5, 7]
     # Iterate over the numbers array defined above
     # to find the product of all the numbers
 
     product = 1
     numbers.each do |number|
-      # Your Code Here
+      product *= number
     end
     assert_equal 210, product
   end
 
   def test_4
+
     scrabble_score = {
       letter_total: 23,
       word_muliplier: 3,
       bonus: 2
     }
-    # Iterate over the scarbble_score hash defined above
+    # Iterate over the scrabble_score hash defined above
     # to find the product of all the values
 
     product = 1
     scrabble_score.each do |(key, value)|
-      # Your Code Here
+      product *= value
     end
     assert_equal 138, product
   end
 
   def test_5
+
     airlines = ["Southwest", "Delta", "United", "Frontier"]
     # Iterate over the airlines array defined above to
     # create a hash with the name of the airline as the
@@ -67,6 +71,9 @@ class InjectPatternTest < Minitest::Test
 
     number_of_letters = {}
     # Your Code Here
+    airlines.each do |airline|
+      number_of_letters[airline] = airline.length
+    end
 
     expected = {
       "Southwest" => 9,
@@ -78,6 +85,7 @@ class InjectPatternTest < Minitest::Test
   end
 
   def test_6
+
     topping_calories = {
       pepperoni: 430,
       sausage: 400,
@@ -90,22 +98,30 @@ class InjectPatternTest < Minitest::Test
 
     toppings = []
     # Your Code Here
+    topping_calories.each do |key, value|
+      toppings << key.to_s
+    end
 
     assert_equal ["pepperoni", "sausage", "olives", "peppers", "onions"], toppings
   end
 
   def test_7
+
     elements = [["a", 1], ["b", 9], ["c", 21]]
     # Iterate over the elements array defined above
     # to find the sum of all the integers
-
+    sum_of_second_values = 0
     # Your Code Here
+    elements.each do |array|
+      sum_of_second_values += array[1]
+    end
 
     assert_equal 31, sum_of_second_values
 
   end
 
   def test_8
+
     toppings = {
       pepperoni: {
         calories: 430,
@@ -131,13 +147,18 @@ class InjectPatternTest < Minitest::Test
     # Iterate over the toppings array defined above to find
     # total calories. You will need to multiply each topping's
     # calorie count by the quantity
+    total_calories = 0
 
     # Your Code Here
+    toppings.each do |type, hash|
+      total_calories += (hash[:calories] * hash[:quantity])
+    end
 
     assert_equal 6950, total_calories
   end
 
   def test_9
+
     grades = {
       quizzes: [8, 5, 3, 6, 5],
       tests: [23, 21, 24],
@@ -148,13 +169,17 @@ class InjectPatternTest < Minitest::Test
     # to calculate the final grade. The final grade is
     # calculated by averaging each category together and
     # summing all of the averages
-
+    final_grade = 0
     # Your code goes here
+    grades.each do |assessment, array|
+      final_grade += (array.sum / array.length.to_f)
+    end
 
     assert_equal 85.40, final_grade
   end
 
   def test_10
+
     menu = {
       empanadas: {
         flavors: ["chicken", "potato", "steak", "veggie"],
@@ -172,8 +197,29 @@ class InjectPatternTest < Minitest::Test
 
     # Iterate over the menu hash above to create a printable
     # version of the menu
+    printable_menu = "Menu:\n"\
 
     # Your Code Here
+    menu.each do |food, hash|
+      toinsert = "- "
+      hash[:flavors].each do |flavor|
+        if hash[:flavors].last == flavor
+          toinsert += "and "
+          toinsert += flavor
+          toinsert += " "
+          toinsert += food.to_s
+          if hash[:gluten_free] == false
+            toinsert += " (non gluten free)\n"\
+          elsif hash[:gluten_free] == true
+            toinsert += " (gluten free)\n"\
+          end
+        else
+          toinsert += flavor += ", "
+        end
+      end
+      printable_menu += toinsert
+    end
+
 
     expected =  "Menu:\n"\
                 "- chicken, potato, steak, and veggie empanadas (non gluten free)\n"\
